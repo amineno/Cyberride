@@ -1,0 +1,153 @@
+// CYBERRIDE POSTGRESQL PRISMA SCHEMA (MODULE 01)
+// Database Engine: PostgreSQL 15+ (Supabase / AWS RDS)
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CARD
+  APPLE_PAY
+  GOOGLE_PAY
+  TABBY
+  TAMARA
+  COD
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  passwordHash  String
+  firstName     String?
+  lastName      String?
+  phone         String?
+  role          Role     @default(CUSTOMER)
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orders        Order[]
+  inventoryLogs InventoryLog[]
+
+  @@map("users")
+}
+
+model Product {
+  id              String   @id @default(uuid())
+  sku             String   @unique
+  name            String
+  slug            String   @unique
+  description     String
+  price           Decimal  @db.Decimal(10, 2)
+  compareAtPrice  Decimal? @db.Decimal(10, 2)
+  costPrice       Decimal? @db.Decimal(10, 2)
+  category        String   @default("BACKPACKS")
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  variants        ProductVariant[]
+  orderItems      OrderItem[]
+
+  @@map("products")
+}
+
+model ProductVariant {
+  id                String   @id @default(uuid())
+  productId         String
+  product           Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variantName       String   // e.g. "Stealth Black"
+  stockQuantity     Int      @default(10)
+  lowStockThreshold Int      @default(5)
+  colorHex          String   @default("#0A0A0A")
+  createdAt         DateTime @default(now())
+
+  inventoryLogs     InventoryLog[]
+
+  @@map("product_variants")
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  orderNumber     String        @unique // e.g. "CR-DXB-882910"
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id])
+  status          OrderStatus   @default(PENDING)
+  total           Decimal       @db.Decimal(10, 2)
+  vatAmount       Decimal       @db.Decimal(10, 2) // 5% UAE VAT
+  shippingCost    Decimal       @db.Decimal(10, 2)
+  paymentMethod   PaymentMethod @default(CARD)
+  paymentRef      String?       // Stripe / Telr reference ID
+  trackingNumber  String?       // Aramex tracking
+  shippingAddress Json
+  customerEmail   String
+  customerPhone   String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  orderItems      OrderItem[]
+  inventoryLogs   InventoryLog[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(uuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  productName String
+  quantity    Int
+  unitPrice   Decimal  @db.Decimal(10, 2)
+
+  @@map("order_items")
+}
+
+model InventoryLog {
+  id               String          @id @default(uuid())
+  productVariantId String
+  productVariant   ProductVariant  @relation(fields: [productVariantId], references: [id])
+  changeQuantity   Int
+  reason           String          // "SALE", "RESTOCK", "RETURN"
+  orderId          String?
+  order            Order?          @relation(fields: [orderId], references: [id])
+  adminId          String?
+  admin            User?           @relation(fields: [adminId], references: [id])
+  createdAt        DateTime        @default(now())
+
+  @@map("inventory_logs")
+}
+
+model PromoCode {
+  id            String   @id @default(uuid())
+  code          String   @unique
+  discountValue Int      // e.g. 10 for 10%
+  isActive      Boolean  @default(true)
+  usesCount     Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  @@map("promo_codes")
+}
