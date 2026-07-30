@@ -53,14 +53,14 @@ export const Sector01Hero = ({ onExploreArsenal }) => {
           </p>
 
           {/* Pricing & Installments Badge */}
-          <div className="flex flex-wrap items-baseline gap-4 bg-[#141414]/90 p-4 rounded-xl border border-[#2A2A2A] w-full max-w-md">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 bg-[#141414]/90 p-4 rounded-xl border border-[#2A2A2A] w-full max-w-md">
             <div>
               <div className="text-[10px] font-mono text-gray-400 uppercase">OFFICIAL DUBAI LAUNCH PRICE</div>
-              <div className="font-mono text-3xl font-extrabold text-[#FF1A1A]">
+              <div className="font-mono text-2xl sm:text-3xl font-extrabold text-[#FF1A1A]">
                 349 <span className="text-sm text-white">AED</span>
               </div>
             </div>
-            <div className="border-l border-[#2A2A2A] pl-4">
+            <div className="border-t sm:border-t-0 sm:border-l border-[#2A2A2A] pt-2 sm:pt-0 sm:pl-4 w-full sm:w-auto">
               <div className="text-[10px] font-mono text-gray-400 uppercase">TABBY / TAMARA BNPL</div>
               <div className="text-xs font-mono text-white">
                 4x interest-free of <strong className="text-[#FF1A1A]">87.25 AED/mo</strong>
@@ -69,15 +69,15 @@ export const Sector01Hero = ({ onExploreArsenal }) => {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-4 w-full pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full pt-2">
             <button
               onClick={() => {
                 playClick();
                 addToCart(heroProduct);
               }}
-              className="cyber-button-primary px-7 py-4 rounded-xl text-sm flex items-center gap-3 shadow-[0_0_25px_rgba(225,6,0,0.6)]"
+              className="cyber-button-primary px-5 sm:px-7 py-3.5 sm:py-4 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(225,6,0,0.6)] cursor-pointer w-full sm:w-auto"
             >
-              <Zap className="w-5 h-5 fill-current" />
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
               <span>COMMAND YOUR GEAR — 349 AED</span>
             </button>
 
@@ -86,7 +86,7 @@ export const Sector01Hero = ({ onExploreArsenal }) => {
                 playBeep();
                 setQuickViewProduct(heroProduct);
               }}
-              className="cyber-button-secondary px-5 py-4 rounded-xl text-sm flex items-center gap-2"
+              className="cyber-button-secondary px-5 py-3.5 sm:py-4 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
             >
               <Eye className="w-4 h-4 text-[#FF1A1A]" />
               <span>3D INSPECTOR</span>
@@ -94,20 +94,20 @@ export const Sector01Hero = ({ onExploreArsenal }) => {
           </div>
 
           {/* Trust Badges */}
-          <div className="flex items-center gap-6 pt-2 text-xs font-mono text-gray-400">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2 text-xs font-mono text-gray-400">
             <div className="flex items-center gap-1.5">
               <Shield className="w-4 h-4 text-[#E10600]" />
               <span>2-YEAR UAE WARRANTY</span>
             </div>
-            <div>•</div>
+            <span className="hidden sm:inline">•</span>
             <div>FREE SAME-DAY DUBAI SHIP</div>
-            <div>•</div>
+            <span className="hidden sm:inline">•</span>
             <div>CASH ON DELIVERY</div>
           </div>
         </div>
 
         {/* Right Column: 3D Interactive WebGL Scene */}
-        <div className="lg:col-span-6 h-[480px] lg:h-[560px] w-full relative">
+        <div className="lg:col-span-6 h-[320px] sm:h-[440px] lg:h-[560px] w-full relative">
           <Cyber3DScene interactive={true} />
         </div>
       </div>

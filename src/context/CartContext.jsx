@@ -34,45 +34,101 @@ export const initialProducts = [
     ],
     image: '/assets/nexus-hero.png',
     gallery: [
-      '/assets/nexus-hero.png',
-      '/assets/nexus-lifestyle.png',
-      '/assets/nexus-app.png',
-      '/assets/nexus-detail.png'
+      { title: 'FLAGSHIP HARDSHELL STUDIO', file: '/assets/nexus-hero.png', desc: 'Front armor plate with LED angry eyes display' },
+      { title: 'DUBAI NIGHT RIDER LIFESTYLE', file: '/assets/nexus-lifestyle.png', desc: 'Rider on Sheikh Zayed Road with glowing LED eyes' },
+      { title: 'BLUETOOTH MOBILE APP CONTROL', file: '/assets/nexus-app.png', desc: 'Smartphone companion app matrix selector' },
+      { title: 'IP54 HARDSHELL MACRO DETAIL', file: '/assets/nexus-detail.png', desc: 'Water resistant carbon-fiber texture finish' }
     ],
     ledPresets: ['RED PULSE EYES', 'CYBER CROSSHAIR', 'HAZARD TURN SIGNAL', 'MATRIX RAIN', 'VIPER GLARE']
   },
   {
-    id: 'cb-phantom-mount-02',
-    sku: 'CB-PHANTOM-MOUNT',
-    name: 'PHANTOM HUD HELMET MOUNT',
-    tagline: 'Quick-Release Magnetic HUD Bracket',
-    price: 149,
+    id: 'cb-phone-holder-02',
+    sku: 'CB-WIRELESS-HOLDER',
+    name: 'CYBERRIDE WIRELESS CHARGING PHONE HOLDER FOR MOTORCYCLE',
+    tagline: 'Fast Wireless Charging & Dual USB Output | Anti-Vibration Mount',
+    price: 120,
     category: 'ACCESSORIES',
-    badge: 'POPULAR ADD-ON',
-    rating: 4.8,
-    reviewsCount: 42,
-    stock: 12,
-    description: 'Aerodynamic magnetic mount system for attaching CyberRide telemetry HUD to standard full-face helmets.',
-    features: ['Neodymium N52 Magnets', 'Universal Helmet Clip', 'Vibration Damping Gasket'],
+    badge: 'WIRELESS CHARGER',
+    rating: 4.9,
+    reviewsCount: 94,
+    stock: 15,
+    description: 'Heavy-duty motorcycle phone holder featuring high-speed Qi wireless charging, dual USB outputs, IP66 waterproof seals, and anti-shock vibration dampeners for extreme riding conditions.',
+    features: [
+      'Fast Qi Wireless Charging (15W Max Output)',
+      'Dual USB-A & Type-C High-Output Charging Ports',
+      'Vibration Dampening Anti-Shock Protection Module',
+      'IP66 Waterproof & Weatherproof Enclosure',
+      '360-Degree Ball Joint Handlebar Clamp',
+      'Universal Smartphone Compatibility (4.7" to 7.2")'
+    ],
     colors: [{ name: 'STEALTH BLACK', hex: '#0A0A0A' }],
-    image: '/assets/nexus-hero.png',
+    image: '/assets/phone-holder-hero.png',
+    gallery: [
+      { title: 'STUDIO OVERVIEW', file: '/assets/phone-holder-hero.png', desc: 'Fast wireless charging pad with smartphone clamped' },
+      { title: 'WIRELESS CHARGER STAGE', file: '/assets/phone-holder-1.png', desc: 'Active charging wave indicator on handlebar mount' },
+      { title: 'USB & CLAMP MACRO', file: '/assets/phone-holder-2.png', desc: 'Dual USB port & precision alloy adjustment knob' },
+      { title: 'DUBAI NIGHT RIDE MOUNT', file: '/assets/phone-holder-3.png', desc: 'Cockpit telemetry view mounted on superbike' }
+    ],
     ledPresets: []
   },
   {
-    id: 'cb-glove-pro-03',
-    sku: 'CB-GLOVE-PRO',
-    name: 'CYBERPULSE RIDING GLOVES',
-    tagline: 'Touchscreen Compatible Carbon Knuckle Protection',
-    price: 199,
-    category: 'GEAR',
-    badge: 'CE CERTIFIED',
-    rating: 4.9,
-    reviewsCount: 89,
-    stock: 8,
-    description: 'Tactile smartphone touchscreen tips with reinforced Kevlar/Carbon knuckle armor.',
-    features: ['Carbon Fiber Knuckles', 'Smart Touchscreen Index & Thumb', 'Reinforced Palm'],
+    id: 'cb-welcome-light-03',
+    sku: 'CB-WELCOME-LIGHT',
+    name: 'CYBERRIDE™ LED CAR DOOR WELCOME LIGHT',
+    tagline: 'High Definition & High Brightness Laser Emblem Projector',
+    price: 50,
+    category: 'LIGHTING',
+    badge: 'HIGH DEFINITION LED',
+    rating: 4.8,
+    reviewsCount: 112,
+    stock: 30,
+    description: 'High-definition LED logo welcome puddle projector light for car doors. Projects ultra-bright, laser-crisp CyberRide optics onto the ground whenever your vehicle door opens.',
+    features: [
+      'High Definition & High Brightness Optical Lens',
+      'Automatic Infrared Magnetic Door Sensor',
+      'Wireless Easy Installation (No Drilling Required)',
+      'Low Power Consumption & High Efficiency LED',
+      'Heat-Resistant Aluminum Alloy Heat Sink',
+      'Universal Fit for All Car Doors'
+    ],
     colors: [{ name: 'STEALTH BLACK', hex: '#0A0A0A' }],
-    image: '/assets/nexus-hero.png',
+    image: '/assets/welcome-light-hero.png',
+    gallery: [
+      { title: 'WELCOME EMBLEM PROJECTION', file: '/assets/welcome-light-hero.png', desc: 'High brightness LED logo projected on asphalt' },
+      { title: 'LUXURY NIGHT CAR DOOR', file: '/assets/welcome-light-1.png', desc: 'Open driver door displaying crisp blue puddle light' },
+      { title: 'OPTICAL LENS MODULE', file: '/assets/welcome-light-2.png', desc: 'Compact glass lens projector unit detail' },
+      { title: 'DUBAI STREET ILLUMINATION', file: '/assets/welcome-light-3.png', desc: 'Ground lighting reflection on wet pavement' }
+    ],
+    ledPresets: []
+  },
+  {
+    id: 'cb-carplay-adapter-04',
+    sku: 'CB-WIRELESS-CARPLAY',
+    name: 'CYBERRIDE WIRELESS CARPLAY AND ANDROID AUTO ADAPTER',
+    tagline: '2 IN 1 Wireless Adapter for CarPlay & Android Auto | A7 Chip 5.8GHz',
+    price: 100,
+    category: 'TECH',
+    badge: '2 IN 1 ADAPTER',
+    rating: 4.9,
+    reviewsCount: 156,
+    stock: 25,
+    description: 'Convert wired CarPlay and Android Auto to 100% wireless! Powered by high-speed A7 microchip, 5.8GHz Wi-Fi + Bluetooth 5.2 for instant low-latency navigation and media streaming.',
+    features: [
+      '2 in 1 Dual Compatibility (CarPlay & Android Auto)',
+      'A7 Microchip High Speed Processor',
+      '5.8GHz Wi-Fi + Bluetooth 5.2 Dual Band',
+      'Instant Auto-Connect within 5 Seconds',
+      'Preserves OEM Steering Wheel Controls & Touchscreen',
+      'Compact Carbon Fiber Weave Enclosure'
+    ],
+    colors: [{ name: 'CARBON FIBER', hex: '#1C1C1C' }],
+    image: '/assets/carplay-adapter-hero.png',
+    gallery: [
+      { title: 'CONSOLE DASHBOARD SYNC', file: '/assets/carplay-adapter-hero.png', desc: 'Wireless 2-in-1 adapter connected to vehicle screen' },
+      { title: 'CARPLAY & ANDROID AUTO', file: '/assets/carplay-adapter-1.png', desc: 'Navigation & media playing via wireless adapter' },
+      { title: 'A7 CHIP HARDWARE', file: '/assets/carplay-adapter-2.png', desc: 'High speed wireless transmitter module' },
+      { title: 'CARBON FIBER ENCLOSURE', file: '/assets/carplay-adapter-3.png', desc: 'Ultra compact form factor and status indicator' }
+    ],
     ledPresets: []
   }
 ];
@@ -157,7 +213,16 @@ export const CartProvider = ({ children }) => {
   const [products, setProducts] = useState(() => {
     try {
       const saved = localStorage.getItem('cyberride_admin_products');
-      return saved ? JSON.parse(saved) : initialProducts;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // If cached products are missing the new items, sync with initialProducts
+        if (parsed.length < 4 || !parsed.some(p => p.id === 'cb-phone-holder-02')) {
+          localStorage.setItem('cyberride_admin_products', JSON.stringify(initialProducts));
+          return initialProducts;
+        }
+        return parsed;
+      }
+      return initialProducts;
     } catch (e) {
       return initialProducts;
     }

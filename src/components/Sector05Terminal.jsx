@@ -132,10 +132,6 @@ export const Sector05Terminal = ({ onOpenAdmin, onOpenTerms, onOpenPrivacy, onOp
           </div>
 
           <div className="flex flex-wrap items-center gap-6">
-            <button onClick={onOpenAdmin} className="hover:text-[#FF1A1A] transition cursor-pointer">
-              ADMIN DASHBOARD
-            </button>
-            <span className="text-gray-700">•</span>
             <button onClick={onOpenPrivacy} className="hover:text-white transition cursor-pointer">
               PRIVACY POLICY
             </button>

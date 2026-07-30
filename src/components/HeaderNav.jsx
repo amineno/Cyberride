@@ -137,19 +137,6 @@ export const HeaderNav = ({ activeSector, setActiveSector }) => {
             </button>
           ) : (
             <div className="hidden sm:flex items-center gap-2">
-              {user.role === 'ADMIN' && (
-                <button
-                  onClick={() => {
-                    playBeep();
-                    setIsAdminOpen(true);
-                  }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono bg-[#E10600]/20 text-[#FF1A1A] border border-[#FF1A1A]/60 hover:bg-[#E10600] hover:text-white transition cursor-pointer shadow-[0_0_12px_rgba(225,6,0,0.4)] font-bold"
-                >
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>ADMIN PORTAL</span>
-                </button>
-              )}
-
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono bg-[#141414] border border-[#2A2A2A]">
                 <User className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="text-white font-bold max-w-[110px] truncate">{user.name}</span>
@@ -251,16 +238,6 @@ export const HeaderNav = ({ activeSector, setActiveSector }) => {
                   <div>• Cash on Delivery (COD) Available</div>
                 </div>
               </div>
-
-              <button
-                onClick={() => {
-                  setIsAdminOpen(true);
-                  setIsMenuOpen(false);
-                }}
-                className="w-full py-3 rounded bg-[#E10600]/20 border border-[#E10600] text-white font-mono text-xs font-bold hover:bg-[#E10600] transition flex items-center justify-center gap-2"
-              >
-                <ShieldCheck className="w-4 h-4" /> ACCESS BACK-OFFICE ADMIN DASHBOARD
-              </button>
             </div>
 
           </div>

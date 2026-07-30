@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { Cyber3DScene } from './Cyber3DScene';
 import { playClick, playBeep } from '../utils/audioSynth';
-import { X, ShoppingBag, Star, Check, Eye, Image as ImageIcon, Box } from 'lucide-react';
+import { X, ShoppingBag, Star, Check, Eye, Image as ImageIcon } from 'lucide-react';
 
 export const ProductQuickViewModal = () => {
   const { quickViewProduct, setQuickViewProduct, addToCart, setIsCheckoutOpen } = useCart();
   const [selectedColor, setSelectedColor] = useState('STEALTH BLACK');
   const [quantity, setQuantity] = useState(1);
-  const [viewMode, setViewMode] = useState('3D'); // '3D' or 'IMAGE'
   const [selectedImage, setSelectedImage] = useState('/assets/nexus-hero.png');
+  const [viewMode, setViewMode] = useState('IMAGE');
+
+  useEffect(() => {
+    if (quickViewProduct) {
+      const firstImg = quickViewProduct.image || 
+        (quickViewProduct.gallery && (quickViewProduct.gallery[0]?.file || quickViewProduct.gallery[0])) || 
+        '/assets/nexus-hero.png';
+      setSelectedImage(firstImg);
+      setViewMode('IMAGE');
+      setSelectedColor(quickViewProduct.colors?.[0]?.name || 'STEALTH BLACK');
+      setQuantity(1);
+    }
+  }, [quickViewProduct]);
 
   if (!quickViewProduct) return null;
 
-  const hexColor = selectedColor === 'PHANTOM GREY' ? '#2A2A2A' : '#0A0A0A';
-
-  const galleryImages = [
-    { title: 'HARDSHELL STUDIO', file: '/assets/nexus-hero.png' },
-    { title: 'NIGHT RIDER LIFESTYLE', file: '/assets/nexus-lifestyle.png' },
-    { title: 'APP CONTROL MATRIX', file: '/assets/nexus-app.png' },
-    { title: 'HARDSHELL DETAIL', file: '/assets/nexus-detail.png' }
-  ];
+  const galleryList = (quickViewProduct.gallery && quickViewProduct.gallery.length > 0)
+    ? quickViewProduct.gallery.map((g, idx) => typeof g === 'string' ? { title: `SHOT 0${idx + 1}`, file: g } : { title: g.title, file: g.file })
+    : [{ title: 'STUDIO OVERVIEW', file: quickViewProduct.image || '/assets/nexus-hero.png' }];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
@@ -37,64 +43,34 @@ export const ProductQuickViewModal = () => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Left 60%: 3D WebGL Viewer OR Selected Image Display */}
+        {/* Left 60%: Selected Image Display */}
         <div className="lg:col-span-7 flex flex-col gap-3">
           
-          {/* Mode Switcher Tabs */}
-          <div className="flex items-center justify-between bg-[#141414] p-1.5 rounded-xl border border-[#2A2A2A]">
-            <div className="flex gap-1">
-              <button
-                onClick={() => {
-                  playClick();
-                  setViewMode('3D');
-                }}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === '3D'
-                    ? 'bg-[#E10600] text-white shadow-[0_0_12px_rgba(225,6,0,0.5)]'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <Box className="w-3.5 h-3.5" />
-                <span>3D MODEL</span>
-              </button>
-              <button
-                onClick={() => {
-                  playClick();
-                  setViewMode('IMAGE');
-                }}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === 'IMAGE'
-                    ? 'bg-[#E10600] text-white shadow-[0_0_12px_rgba(225,6,0,0.5)]'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <ImageIcon className="w-3.5 h-3.5" />
-                <span>PHOTO GALLERY</span>
-              </button>
+          {/* Gallery Header Badge */}
+          <div className="flex items-center justify-between bg-[#141414] p-1.5 px-3 rounded-xl border border-[#2A2A2A]">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-white">
+              <ImageIcon className="w-3.5 h-3.5 text-[#E10600]" />
+              <span>PHOTO GALLERY</span>
             </div>
             <span className="text-[10px] font-mono text-gray-500 uppercase px-2">DUBAI HUB</span>
           </div>
 
           {/* Viewer Stage */}
           <div className="h-[380px] lg:h-[440px] w-full relative rounded-xl overflow-hidden border border-[#2A2A2A] bg-black">
-            {viewMode === '3D' ? (
-              <Cyber3DScene interactive={true} activeColor={hexColor} />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center p-4 bg-radial-glow">
-                <img
-                  src={selectedImage}
-                  alt={quickViewProduct.name}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            )}
+            <div className="w-full h-full flex items-center justify-center p-4 bg-radial-glow">
+              <img
+                src={selectedImage}
+                alt={quickViewProduct.name}
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
 
           {/* Quick Photo Thumbnail Row */}
           <div className="flex gap-2 overflow-x-auto pb-1">
-            {galleryImages.map((img) => (
+            {galleryList.map((img, i) => (
               <button
-                key={img.file}
+                key={i}
                 onClick={() => {
                   playClick();
                   setSelectedImage(img.file);
